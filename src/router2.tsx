@@ -46,8 +46,12 @@ const router = createBrowserRouter([
   {
     path: '*',
     element: <NotFound/>,
-  },
-])
+  }
+],
+  // 基础路由
+  {
+  basename: '/app'
+})
 
 
 export default router
