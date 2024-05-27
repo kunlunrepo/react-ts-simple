@@ -1,35 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {memo, useCallback, useMemo, useState} from "react";
 import './App.css'
 
 function App() {
+
   const [count, setCount] = useState(0)
+
+  const total1 = () => {
+    console.log('total1....')
+    const list = [1,3,5,7,9]
+    return list.reduce((pre, cur) => {
+      return pre + cur
+    }, 0)
+  }
+
+  // 缓存值
+  const total2 = useMemo(() => {
+    console.log('total2....')
+    const list = [1,3,5,7,9]
+    return list.reduce((pre, cur) => {
+      return pre + cur
+    }, 0)
+  }, [])
+
+  const handleClick = () => {
+    setCount(count + 1)
+  }
+
+  // 缓存函数 useCallback
+  const handleChildClick = useCallback(() => {
+    console.log('子组件点击 update....')
+  }, [])
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <div className='App'>
+        <p>欢迎学习React开发</p>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          <span>Count值：{count}</span>
+          <button onClick={handleClick}>按钮</button>
         </p>
+        <p>{total1()}</p>
+        <p>{total2}</p>
+        <Child onClik={handleChildClick}/>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
+
+// 子组件 memo 缓存组件
+const Child = memo(
+  ({onClik}: any) => {
+    console.log('Child组件渲染')
+    return (
+      <>
+        <p>
+          Child组件
+          <button onClick={onClik}>子节点按钮</button>
+        </p>
+      </>
+    )
+  }
+)
+
 
 export default App
