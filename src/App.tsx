@@ -1,5 +1,6 @@
 import './App.css'
 import {useEffect, useState} from "react";
+import {useWindowSize} from "./useWindowSize.ts";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -35,26 +36,7 @@ function App() {
     }
   }, [])
 
-  // 自定义hook
-  const [size, setSize] = useState(
-    {
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight
-    }
-  )
-  // 监听窗口变化
-  const handleResize = () => {
-    setSize({
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight
-    })
-  }
-  useEffect(() =>{
-    window.addEventListener('resize', handleResize)
-    return () => {
-      window.removeEventListener('resize',  handleResize)
-    }
-  }, [])
+  const [size] = useWindowSize()
 
   return (
     <>
@@ -62,7 +44,6 @@ function App() {
         <p>欢迎学习react开发</p>
         <p>count: {count} total: {total}</p>
         <p>窗口大小 宽度：{size.width} 高度：{size.height}</p>
-
       </div>
     </>
   )
