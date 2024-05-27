@@ -14,6 +14,8 @@ function App() {
     fontSize: '20px'
   }
   const loginName = <span style={style}>kunlunrepo</span>
+  // 循环
+  const list = ['Tom', 'Jack', 'Lucy']
 
   return (
     <>
@@ -22,6 +24,12 @@ function App() {
         {h1}
         {isAdmin ? <span>管理员</span> : <span>游客</span>}
         {loginName}
+        <p>用户列表</p>
+        {
+          list.map((item, index) => {
+            return <a key={index}>{item}  </a>
+          })
+        }
 
       </div>
     </>
