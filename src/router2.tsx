@@ -1,4 +1,4 @@
-import {createBrowserRouter, Navigate, Link, useParams, Outlet} from "react-router-dom";
+import {createBrowserRouter, Navigate, Link, useParams, Outlet, redirect, useLoaderData} from "react-router-dom";
 
 import App from "./App.tsx";
 
@@ -23,6 +23,9 @@ function Apple() {
 }
 
 function Order() {
+  // 获取loader处理后的值
+  const data = useLoaderData();
+  console.log('Order...', data)
   const params = useParams()
   return <h2>这是一个订单组件 订单： {params.orderId}</h2>
 }
@@ -35,70 +38,37 @@ function Groods() {
 function Groods2() {
   return <div>
     <h2>这是一个商品组件2 </h2>
-    <Outlet />
+    <Outlet/>
   </div>
 }
 
+// 先执行loader，再执行组件
+function orderLoader({params}: any) {
+  console.log('orderLoader init', params.id)
+  // return redirect('/login')
+  // 可以做权限拦截验证
+  return  fetch(`/${params.id}.json`)
+  // return {
+  //   id: params.id,
+  //   userName: 'jack'
+  // }
+}
+
 const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <App/>,
-    },
-    {
-      path: '/react',
-      element: <ReactDemo/>,
-    },
-    {
-      path: '/vite',
-      element: <ViteDemo/>,
-    },
-    {
-      path: '/test',
-      element: <Test/>,
-    },
-    {
-      path: '/apple',
-      element: <Apple/>,
-    },
-    {
-      path: '/order/:orderId',
-      element: <Order/>
-    },
-    {
-      path: '/goods/:goodsId/order/:orderId',
-      element: <Groods/>
-    },
-    {
-      path: '/goods',
-      element: <Groods2/>,
-      children: [
-        {
-          path: 'list',
-          element: <div>
-            <p>商品1</p>
-            <p>商品2</p>
-            <p>商品3</p>
-          </div>
-        },
-        {
-          path: 'cart',
-          element: <div>
-            <p>苹果手机，价格5999</p>
-            <p>小米手机，价格3999</p>
-            <p>华为手机，价格4999</p>
-          </div>
-        }
-      ]
-    },
-    {
-      path: '*',
-      element: <NotFound/>,
-    }
-  ],
-  // 基础路由
   {
-    basename: '/app'
-  })
+    path: '/',
+    element: <App/>,
+  },
+  {
+    path: '/order/:id',
+    element: <Order/>,
+    loader: orderLoader
+  },
+  {
+    path: '*',
+    element: <NotFound/>,
+  },
+])
 
 
 export default router
