@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-import {BrowserRouter, Routes, Route, HashRouter} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, HashRouter, Link} from 'react-router-dom'
 
 function ReactDemo() {
-  return <div>React Demo</div>
+  return <div>React Demo <Link to="/">Back</Link></div>
 }
 
+function ViteDemo() {
+  return <div>Vite Demo</div>
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   /*<BrowserRouter>
@@ -24,7 +27,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path='/' element={<App />}></Route>
         <Route path='/react' element={<ReactDemo />}></Route>
+        <Route path='/vite' element={<ViteDemo />}></Route>
       </Routes>
-    </React.StrictMode>,
+    </React.StrictMode>
   </HashRouter>
 )
