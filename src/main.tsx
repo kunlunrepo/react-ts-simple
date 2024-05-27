@@ -17,6 +17,10 @@ function Test () {
   return <div>Test Demo {<Navigate to='/react' />}</div>
 }
 
+function NotFound () {
+  return <div>404 当前页面不存在</div>
+}
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   /*<BrowserRouter>
     <React.StrictMode>
@@ -33,6 +37,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path='/react' element={<ReactDemo />}></Route>
         <Route path='/vite' element={<ViteDemo />}></Route>
         <Route path='/test' element={<Test />}></Route>
+        <Route path='*' element={<NotFound />}></Route>
       </Routes>
     </React.StrictMode>
   </HashRouter>
