@@ -1,5 +1,5 @@
 import './App.css'
-import AppAfter from "./demo1-after.tsx";
+import AppAfter from "./demo2.tsx";
 
 function App() {
 
