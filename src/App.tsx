@@ -1,6 +1,6 @@
 import './App.css'
 
-function App() {
+function App({type}: {type: string}) {
 
   // 变量-字符串
   const name = 'jack'
@@ -16,6 +16,13 @@ function App() {
   const loginName = <span style={style}>kunlunrepo</span>
   // 循环
   const list = ['Tom', 'Jack', 'Lucy']
+  // 事件
+  // const useName = "Tom"
+  const handleChange = (e: any) => {
+    console.log(e.target.value)
+  }
+  // 属性传值 type
+
 
   return (
     <>
@@ -30,6 +37,10 @@ function App() {
             return <a key={index}>{item}  </a>
           })
         }
+        <p>
+          <input type='text' onChange={handleChange}/>
+        </p>
+        <p>{type}</p>
 
       </div>
     </>
