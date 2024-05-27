@@ -1,9 +1,9 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 
-import {HashRouter} from 'react-router-dom'
-import BaseRouter from "./router1.tsx";
+import { HashRouter, RouterProvider} from 'react-router-dom'
+// import BaseRouter from "./router1.tsx";
+import router from "./router2.tsx";
 
 
 
@@ -16,9 +16,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       </Routes>
     </React.StrictMode>,
   </BrowserRouter>*/
-  <HashRouter>
+  /*<HashRouter>
     <React.StrictMode>
       <BaseRouter/>
     </React.StrictMode>
-  </HashRouter>
+  </HashRouter>*/
+  <RouterProvider router={router} />
 )
