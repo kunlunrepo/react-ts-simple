@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-import {BrowserRouter, Routes, Route, HashRouter, Link} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, HashRouter, Link, Navigate} from 'react-router-dom'
 
 function ReactDemo() {
   return <div>React Demo <Link to="/">Back</Link></div>
@@ -11,6 +11,10 @@ function ReactDemo() {
 
 function ViteDemo() {
   return <div>Vite Demo</div>
+}
+
+function Test () {
+  return <div>Test Demo {<Navigate to='/react' />}</div>
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -28,6 +32,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path='/' element={<App />}></Route>
         <Route path='/react' element={<ReactDemo />}></Route>
         <Route path='/vite' element={<ViteDemo />}></Route>
+        <Route path='/test' element={<Test />}></Route>
       </Routes>
     </React.StrictMode>
   </HashRouter>
