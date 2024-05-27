@@ -2,12 +2,18 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import {NavLink} from 'react-router-dom'
+import {NavLink, useNavigate} from 'react-router-dom'
 
 function App() {
   const [count, setCount] = useState(0)
 
-  return (
+  // 编程式导航
+  const navigator = useNavigate()
+  const handleClick = () => {
+    navigator('/react')
+  }
+
+    return (
     <>
       <div>
         <NavLink to="/react">
@@ -19,8 +25,8 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={handleClick}>
+          点击跳转
         </button>
       </div>
     </>
